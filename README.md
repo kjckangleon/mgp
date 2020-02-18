@@ -4,6 +4,7 @@
 ##### The test_myinfra file will check the server with the testinfra modules of file, sysctl and system_info.
 
 #####test_myinfra.py
+
     ```
     def test_passwd_file(host):		
     	passwd = host.file("/etc/passwd")		
@@ -25,7 +26,6 @@
    	assert os_type == "linux"		
    	assert distribution == "centos"		
    	assert release == "7"		
-
      ```
 
 ##### To run a python file execute: py.test -v test_myinfra.py
@@ -45,5 +45,13 @@
 
     =================================== 3 passed in 0.09 seconds ====================================
     [root@face-recognition ~]#	
+    ```
+4. Install testinfra using pip command.
+    ```
+    [root@localhost ~]# pip install testinfra
+    …
+    Installing collected packages: testinfra
 
+    Complete!
+    [root@localhost ~]#
     ```
