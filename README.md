@@ -27,9 +27,9 @@ The test_myinfra file will check the server with the testinfra modules of file, 
    	assert distribution == "centos"		
    	assert release == "7"
     ```
-
+    
 To run a python file execute: py.test -v test_myinfra.py
-			
+
     ```
     ====================================== test session starts ======================================
     platform linux2 -- Python 2.7.5, pytest-4.6.9, py-1.8.1, pluggy-0.13.1 -- /usr/bin/python2
