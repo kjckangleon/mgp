@@ -1,9 +1,10 @@
 # Test-infra Test Execution Method
-## Please refer below for the sample test execution of test-infra
+Please refer below for the sample test execution of test-infra
+
 Let's create a python file  test_myinfra.py.
 The test_myinfra file will check the server with the testinfra modules of file, sysctl and system_info.
 
-   ```
+    ```
     def test_passwd_file(host):		
     	passwd = host.file("/etc/passwd")		
     	assert passwd.contains("root")		
@@ -11,21 +12,21 @@ The test_myinfra file will check the server with the testinfra modules of file, 
     	assert passwd.group == "root"		
     	assert passwd.mode == 0o644	
    
-   def test_sysctl(host):		
+    def test_sysctl(host):		
    	hostname=host.sysctl("kernel.hostname")		
    	release=host.sysctl("kernel.osrelease")		
    	assert hostname == "hostname"		
    	assert release == "release"		
    
    
-   def test_system_info(host):		
+    def test_system_info(host):		
    	os_type=host.system_info.type		
    	distribution=host.system_info.distribution		
    	release=host.system_info.release		
    	assert os_type == "linux"		
    	assert distribution == "centos"		
-   	assert release == "7"		
-     ```
+   	assert release == "7"
+    ```
 
 To run a python file execute: py.test -v test_myinfra.py
 			
