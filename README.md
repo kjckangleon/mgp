@@ -1,61 +1,49 @@
-# mgp
+# Test-infra Test Execution Method
+##### Please refer below for the sample test execution of test-infra
+##### Let's create a python file  test_myinfra.py
+######## The test_myinfra file will check the server with the testinfra modules of file, sysctl and system_info.
 
-# Test-infra Installation Procedure
-##### Please refer to the steps below to install Test-infra in Centos 7.6 Server.
-
-1. Test infra is installed via pip but before that we need to install epel-release
+test_myinfra.py
     ```
-    [root@localhost ~]# yum install epel-release
-     …
-     Installed:
-     epel-release.noarch 0:7-11
+    def test_passwd_file(host):		
+    	passwd = host.file("/etc/passwd")		
+    	assert passwd.contains("root")		
+    	assert passwd.user == "root"		
+    	assert passwd.group == "root"		
+    	assert passwd.mode == 0o644		
+		
+   def test_sysctl(host):		
+   	hostname=host.sysctl("kernel.hostname")		
+   	release=host.sysctl("kernel.osrelease")		
+   	assert hostname == "hostname"		
+   	assert release == "release"		
+		
+   def test_system_info(host):		
+   	os_type=host.system_info.type		
+   	distribution=host.system_info.distribution		
+   	release=host.system_info.release		
+   	assert os_type == "linux"		
+   	assert distribution == "centos"		
+   	assert release == "7"		
 
-     Complete!
-    [root@localhost ~]#
      ```
 
-2. Install pip.
+##### To run a python file execute: py.test -v test_myinfra.py
+			
+
     ```
-    [root@localhost ~]# yum install python-pip
-     …
-     Installed:
-     python2-pip.noarch 0:8.1.2-10.el7
+    ====================================== test session starts ======================================
+    platform linux2 -- Python 2.7.5, pytest-4.6.9, py-1.8.1, pluggy-0.13.1 -- /usr/bin/python2
+    cachedir: .pytest_cache
+    rootdir: /root
+    plugins: testinfra-3.4.0
+    collected 3 items
 
-     Complete!
-    [root@localhost ~]#
-     ```       
+    test_myinfra.py::test_passwd_file[local] PASSED                                           [ 33%]
+    test_myinfra.py::test_sysctl[local] PASSED                                                [ 66%]
+    test_myinfra.py::test_system_info[local] PASSED                                           [100%]
 
-3. Upgrade pip.
-    ```
-    [root@localhost ~]# pip install --upgrade pip
-     …
-     Installed:
-     Successfully installed pip-20.0.2
-
-     Complete!
-    [root@localhost ~]#
-     ```      
-
-4. Install testinfra using pip command.
-    ```
-    [root@localhost ~]# pip install testinfra
-    …
-    Installing collected packages: testinfra
-
-    Complete!
-    [root@localhost ~]#
-    ```
-
-5. Confirm if testinfra is running, execute py.test
-    ```
-    [root@localhost ~]# py.test				
-    ============================= test session starts ===============================
-    platform linux2 -- Python 2.7.5, pytest-4.6.9, py-1.8.1, pluggy-0.13.1
-    rootdir: /root				
-    plugins: testinfra-3.4.0				
-    collected 0 items				
-				
-    ========================== no tests ran in 0.02 seconds =========================
-    [root@localhost ~]#				
+    =================================== 3 passed in 0.09 seconds ====================================
+    [root@face-recognition ~]#	
 
     ```
