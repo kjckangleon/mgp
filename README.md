@@ -1,9 +1,9 @@
 # Test-infra Test Execution Method
 ##### Please refer below for the sample test execution of test-infra
 ##### Let's create a python file  test_myinfra.py
-######## The test_myinfra file will check the server with the testinfra modules of file, sysctl and system_info.
+##### The test_myinfra file will check the server with the testinfra modules of file, sysctl and system_info.
 
-test_myinfra.py
+#####test_myinfra.py
     ```
     def test_passwd_file(host):		
     	passwd = host.file("/etc/passwd")		
